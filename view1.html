@@ -1,0 +1,17 @@
+<div class="loop-1">
+	<h1>View 1</h1>
+		<input type="text" ng-model="city1" />{{city1}}
+    <ul>
+	 <li ng-repeat="name1 in users | filter:city1 | orderBy:'name'">{{name1.name | uppercase}} - {{name1.city}}</li>
+	</ul>
+	<br />
+	Customer name:
+	<input type="text" ng-model="newCustomer.name2" placeholder="Enter name here">
+	<br />
+	Customer City:
+	<input type="text" ng-model="newCustomer.city2" placeholder="Enter city name here">
+	<br />
+	<button ng-click="addCustomer()">Add Customer</button>
+	<br />
+	<a href="#view2">view2</a>
+</div>

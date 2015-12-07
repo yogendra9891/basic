@@ -1,0 +1,30 @@
+store_manager_store_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: StoreManagerStoreBundle:Default:index }
+top_shop:
+    pattern:  /webapi/topshopsperrevenue
+    defaults: { _controller: StoreManagerStoreBundle:RestChildStore:topshopsperrevenue }
+top_citzen:
+    pattern:  /webapi/topcitizenperincome
+    defaults: { _controller: StoreManagerStoreBundle:RestChildStore:topcitizenperincome }
+economs:
+    pattern:  /webapi/economs
+    defaults: { _controller: StoreManagerStoreBundle:Shoppingplus:economs }
+cardsolds:
+    pattern:  /webapi/cardsolds
+    defaults: { _controller: StoreManagerStoreBundle:Shoppingplus:cardsolds }
+listpublicuserstores:
+    pattern:  /webapi/listpublicuserstores
+    defaults: { _controller: StoreManagerStoreBundle:RestStoreExternalProfile:listpublicuserstores }
+listpublicstorealbums:
+    pattern:  /webapi/listpublicstorealbums
+    defaults: { _controller: StoreManagerStoreBundle:RestStoreExternalProfile:listpublicstorealbums }
+viewpublicstorealbums:
+    pattern:  /webapi/viewpublicstorealbums
+    defaults: { _controller: StoreManagerStoreBundle:RestStoreExternalProfile:viewpublicstorealbums }
+viewpublicstoredetails:
+    pattern:  /webapi/viewpublicstoredetails
+    defaults: { _controller: StoreManagerStoreBundle:RestStoreExternalProfile:viewpublicstoredetails }
+searchexternalstores:
+    pattern:  /webapi/searchexternalstores
+    defaults: { _controller: StoreManagerStoreBundle:RestStoreExternalProfile:searchexternalstores }

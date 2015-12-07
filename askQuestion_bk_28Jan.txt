@@ -1,0 +1,341 @@
+<?php
+$username = $this->Session->read('UserData.userName');
+//get content page
+$data_decode = json_decode($ruserobj);
+$contentPageId = $data_decode->contentPageId;
+//initilises the variable
+$emailValCheck = '';
+$feedValCheck = '';
+$facebookValCheck = '';
+$twitValCheck = '';
+?>
+<div class="user_welcome">
+<?php
+echo "Hello ". ucfirst($username);
+?>
+</div>
+
+<!-- Code started by Abhishek Gupta -->
+<?php 
+//get userType
+$userType = "Instructor";
+?>
+
+<div class='contentpage_list'>
+<?php 
+  $contentPages = $this->requestAction(array('controller'=>'dashboards', 'action'=>'getContentPages'));
+  if ( count($contentPages) ) {
+?>    
+
+    <div class="module-heading">
+             <div class="wrapper-date-areaform">
+	            <div class="content-pagename-area">
+	                  Ask a Question Access
+	                </div>
+	              <div class="date-area-container-first">
+                            <div class="content-pagepost-area">
+		                      <!-- post available date setting area start -->
+	                           <div class="post_available_area">
+								 <span>Posts</span>
+	                           </div>
+	                                <!-- post available date setting area end -->
+	                         </div>
+	                         <div class="content-pagereply-area">
+			                      <!-- reply available date setting area start -->
+		                           <div class="reply_available_area">
+									 <span>Replies</span>
+		                           </div>
+		                           <!-- reply available date setting area end -->
+	                          </div>
+	                        <div class="content-pageread-area">
+		                         <!-- Read available date setting area start -->
+	                             <div class="read_available_area">
+									<span>Read Only</span>
+                                  </div>   
+	                              <!-- Read available date setting area start -->    
+	                        </div>
+                 </div>
+               </div>
+       </div>
+<div>
+ <ul id="acc1" class="accordion accordian-common-module">
+      <li>
+         <h4 class="h"><a class="trigger" href="javascript:void(0);">Module 1</a></h4>
+            <div class="outer">
+               <div class="inner">
+                   <ul>
+                     <li>
+                        <h5 class="h"><a class="trigger" href="javascript:void(0);">Topic1</a></h5>
+                          <div style="display: block;" class="outer"><div class="inner">
+                          <ul>
+                          <?php
+                          $i = 0; 
+                          foreach ($contentPages as $content_pages) { 
+                          	$contentReadPage = $this->requestAction(array('controller'=>'dashboards', 'action'=>'getReadContentPage'.'/'.$content_pages['ContentPageSetting']['contentpage_id']));
+                          	//echo date('m/d/Y', $contentReadPage['ReadonlySetting']['end_date']);
+                          	?>
+                            <li class="clear">
+
+                                <?php
+                                  $start_date = $content_pages['ContentPageSetting']['start_date'];
+	                              $end_date = $content_pages['ContentPageSetting']['end_date'];
+	                              $rstart_date = $content_pages['ContentPageSetting']['rstart_date'];
+	                              $rend_date = $content_pages['ContentPageSetting']['rend_date'];
+	                              
+	                              $start_dateval = ($start_date == '0' ? '' : date('m/d/Y', $start_date)); // returns true                              
+	                              $end_dateval = (($end_date == '2020426106' || $end_date == '0') ? '' : date('m/d/Y', $end_date)); // returns true
+	 
+	                              $rstart_dateval = ($rstart_date == '0' ? '' : date('m/d/Y', $rstart_date)); // returns true
+	                              $rend_dateval = (($rend_date == '2020426106' || $rend_date == '0') ? '' : date('m/d/Y', $rend_date)); // returns true
+	
+	                              //read access data
+	                              $read_start_date = $contentReadPage['ReadonlySetting']['start_date'];
+	                              $read_end_date = $contentReadPage['ReadonlySetting']['end_date'];
+	                              
+	                              $read_start_dateval = ($read_start_date == '0' ? '' : date('m/d/Y', $read_start_date)); // returns true
+	                              $read_end_dateval = (($read_end_date == '2020426106' || $read_end_date == '0') ? '' : date('m/d/Y', $read_end_date)); // returns true
+	                              ?>
+	                              <div class="wrapper-date-areaform">
+	                              <span>
+	                              <div class="content-pagename-area">
+	                              <span>
+	                                 <div class="contentpage-name">
+		                              <?php echo $content_pages['ContentPageSetting']['contentpage_id'].'(Forum Page)'; 
+		                              ?>
+		                              <a href="javascript:void(0)" class="editdatesetting" id="editcontentpage_<?php echo $content_pages['ContentPageSetting']['contentpage_id']; ?>">edit</a>
+	                                 </div></span>  <span>
+	                                 <div class="content-begin-end">
+	                                   <div class="begin-date">
+	                                     Begin
+	                                   </div>
+	                                   <div class="endd-date">
+	                                     End
+	                                   </div>
+	                                 </div></span>
+	                              </div>
+	                              </span>
+	                              <div class="date-area-container">
+	                             <?php 
+	                              echo $this->Form->create('dashboards',array('action'=>'saveContentAvailability', 'class'=> 'contentsavesetting', 'id'=> 'savecontent_'.$content_pages['ContentPageSetting']['contentpage_id']));?>
+	                              <div class="content-pagepost-area">
+		                             <!-- post available date setting area start -->
+	                                 <div class="post_available_area">
+ 		                               <?php 
+ 		                                  ?>
+ 		                                    <div class="stt-date" id="sttdate_<?php echo $content_pages['ContentPageSetting']['contentpage_id'];?>">
+<!--  		                                 	<label>Begin</label> -->
+ 		                                 	<span><?php echo $start_dateval; ?></span>
+ 		                                 	</div>
+ 		                              <?php   
+ 		                                
+ 		                                  ?>
+ 		                                 <div class="endd-date" id="endtdate_<?php echo $content_pages['ContentPageSetting']['contentpage_id'];?>">
+<!--  		                                 <label>End</label> -->
+ 		                                 <span><?php echo $end_dateval; ?></span>
+ 		                                 </div> 		                                 
+ 		                                 <?php  ?>
+ 		                                 <div class="st-date" id="stdate_<?php echo $content_pages['ContentPageSetting']['contentpage_id'];?>">
+ 		                                 <?php 
+									         echo $this->Form->input('Start Date', array('name'=>'start_date', 'value'=>$start_dateval, 'label' => '', 'class'=>'startdatefield clearable', 'id' => 'post_startdate_'.$content_pages['ContentPageSetting']['contentpage_id'], 'readonly'=>'readonly'));
+										  ?>
+										  </div>
+										  <div class="end-date" id="enddate_<?php echo $content_pages['ContentPageSetting']['contentpage_id'];?>">
+										  <?php 
+									         echo $this->Form->input('End Date', array('name'=>'end_date', 'value'=>$end_dateval, 'label' => '', 'class'=>'enddatefield clearable', 'id' => 'post_enddate_'.$content_pages['ContentPageSetting']['contentpage_id'], 'readonly'=>'readonly'));
+			                              ?>
+			                             </div>
+			                             
+	                                 </div>
+	                                <!-- post available date setting area end -->
+	                              </div>
+	                              <div class="content-pagereply-area">
+			                           <!-- reply available date setting area start -->
+		                                <div class="reply_available_area">
+			                           <?php 
+ 		                                  ?>
+ 		                                    <div class="rstt-date" id="rsttdate_<?php echo $content_pages['ContentPageSetting']['contentpage_id'];?>">
+<!--  		                                 	<label>Begin</label> -->
+ 		                                 	<span><?php echo $rstart_dateval; ?></span>
+ 		                                 	</div>
+ 		                              <?php   
+ 		                               
+ 		                               ?>
+ 		                                 <div class="rendd-date" id="rendtdate_<?php echo $content_pages['ContentPageSetting']['contentpage_id'];?>">
+<!--  		                                 <label>End</label> -->
+ 		                                 <span><?php echo $rend_dateval; ?></span>
+ 		                                 </div>
+ 		                                 <?php
+ 		                                 ?>
+ 		                                 <div class="rst-date" id="rstdate_<?php echo $content_pages['ContentPageSetting']['contentpage_id'];?>">
+ 		                                 <?php 
+									          echo $this->Form->input('Reply Start Date', array('name'=>'rstart_date', 'value'=>$rstart_dateval, 'label' => '', 'class'=>'startdatefield clearable', 'id' => 'reply_startdate_'.$content_pages['ContentPageSetting']['contentpage_id'], 'readonly'=>'readonly'));
+									     ?>
+									      </div>
+									      <div class="rend-date" id="renddate_<?php echo $content_pages['ContentPageSetting']['contentpage_id'];?>">    
+									     <?php 
+									          echo $this->Form->input('Reply End Date', array('name'=>'rend_date', 'value'=>$rend_dateval, 'label' => '', 'class'=>'enddatefield clearable', 'id' => 'reply_enddate_'.$content_pages['ContentPageSetting']['contentpage_id'], 'readonly'=>'readonly'));
+			                             ?>
+			                              </div>
+		                                </div>
+		                               <!-- reply available date setting area end -->
+	                              </div>
+	                              <div class="content-pageread-area">
+		                            <!-- Read available date setting area start -->
+	                                <div class="read_available_area">
+
+	                                  <?php
+	                                  ?>
+	                                  <div class="readrst-date" id="readstartdate_<?php echo $content_pages['ContentPageSetting']['contentpage_id'];?>">
+<!-- 	                                  <label>Begin</label> -->
+	                                  <span><?php echo $read_start_dateval; ?></span>
+	                                  </div>
+	                                  <?php
+	                                 
+	                                 ?>
+	                                  <div class="readrend-date" id="readenddate_<?php echo $content_pages['ContentPageSetting']['contentpage_id'];?>">
+<!-- 	                                  <label>End</label> -->
+	                                  <span><?php echo $read_end_dateval; ?></span>
+	                                  </div>
+	                                  <?php
+	                                  ?>
+	                                  <div class="rrst-date" id="readstdate_<?php echo $content_pages['ContentPageSetting']['contentpage_id'];?>">
+	                                  <?php 
+						    	          echo $this->Form->input('Read Start Date', array('name'=>'read_start_date', 'value'=>$read_start_dateval, 'label'=>'', 'class'=>'startdatefield clearable', 'id' => 'read_startdate_'.$content_pages['ContentPageSetting']['contentpage_id'], 'readonly'=>'readonly'));
+						    	      ?>
+						    	      </div>
+						    	      <div class="rrend-date" id="rreadenddate_<?php echo $content_pages['ContentPageSetting']['contentpage_id'];?>">  
+						    	      <?php 
+		                                  echo $this->Form->input('Read End Date', array('name'=>'read_end_date', 'value'=>$read_end_dateval, 'label'=>'', 'class'=>'enddatefield clearable', 'id' => 'read_enddate_'.$content_pages['ContentPageSetting']['contentpage_id'], 'readonly'=>'readonly'));
+	                                   ?>
+									 </div>
+	                                </div>   
+	                                 <!-- Read available date setting area start -->    
+	                              </div>
+	                           <?php 
+	                              echo $this->Form->input('Content Page ID',  array('type'=>'hidden', 'name'=>'content_page_id', 'value'=>$content_pages['ContentPageSetting']['contentpage_id']));
+	                              echo $this->Form->submit('Save', array('div'=>array('id'=>'submit_'.$content_pages['ContentPageSetting']['contentpage_id'], 'class'=>'submit-datesave'), 'class'=>'gobutton'));
+	                              echo $this->Form->end();
+                                ?>
+                                </div>
+	                              </div>	                              
+                             <div id="<?php echo 'messagecontent_'.$content_pages['ContentPageSetting']['contentpage_id']; ?>"></div>
+
+                            </li>
+                             <?php 
+                             //ajax call code start for content page date setting
+                             $data = $this->Js->get('#savecontent_'.$content_pages['ContentPageSetting']['contentpage_id'])->serializeForm(array('isForm' => true, 'inline' => true));
+                             $ar = '#messagecontent_'.$content_pages['ContentPageSetting']['contentpage_id'];
+                             $this->Js->get('#savecontent_'.$content_pages['ContentPageSetting']['contentpage_id'])->event(
+                             		'submit',
+                             		$this->Js->request(
+                             				array('action' => 'saveContentAvailability', 'controller' => 'dashboards'),
+                             				array(
+                             						'update' => '#messagecontent_'.$content_pages['ContentPageSetting']['contentpage_id'],
+                             						'data' => $data,
+                             						'async' => true,
+                             						'dataExpression'=>true,
+                             						'method' => 'POST',
+                             						'before'=>'beforeSaveDate("'.$content_pages['ContentPageSetting']['contentpage_id'].'")',
+                             						'complete'=>'completeDateSave("'.$content_pages['ContentPageSetting']['contentpage_id'].'")'
+                             						)
+                             				)
+                                 );
+                             echo $this->Js->writeBuffer();
+                             $i++;
+                             //ajax call code end for content page date setting
+							} ?>
+                          </ul>
+                          
+                      </div>
+                    </div>
+                   </li>
+                </ul>
+                      
+                   </div>
+           </div>
+    </li>
+ </ul> <!-- end accordion 1 -->
+ </div>
+<?php 
+  }                                 
+?>
+</div>
+<div class='backButton'>
+<a class="gobutton_outer" href='javascript:history.go(-1)' >Done</a>
+</div>
+<style type="text/css">
+.content-pagename-area {
+    float: left;
+    width: 30%;
+}
+
+.content-pagepost-area {
+    float: left;
+    width: 20%;
+    border-left: 2px solid;
+}
+
+.content-pagereply-area {
+    float: left;
+    width: 20%;
+    border-left: 2px solid;
+}
+.content-pageread-area {
+    float: left;
+    width: 20%;
+    border-left: 2px solid;
+}
+/*.post_available_area span{text-align: center; display: block;}
+.content-pagereply-area span{text-align: center; display: block;}
+.content-pageread-area span{text-align: center;display: block;} */
+.clear{clear: both;}
+.date-area-container .submit{float: right;}
+
+.content-pagename-area-first {
+    float: left;
+    width: 200px;
+}
+
+.content-pagepost-area-first {
+    float: left;
+    
+}
+
+.content-pagereply-area-first {
+    float: left;
+}
+.content-pageread-area-first {
+    float: left;
+}
+.post_available_area .st-date label {
+    float: left;
+    padding-right: 5px;
+    width: 41px !important;
+}
+.post_available_area .end-date label {
+    padding-right: 5px;
+    float: left;
+    width: 41px !important;
+}
+.st-date{display: none;}
+.end-date{display: none;}
+.rst-date{display: none;}
+.rend-date{display: none;}
+.rrst-date{display: none;}
+.rrend-date{display: none;}
+
+.wrapper-date-areaform {
+    padding-top: 10px;
+}
+.submit-datesave{display: none;}
+.module-heading{padding-bottom: 20px; padding-left: 27px;}
+.contentpage-name {
+    float: left;
+    width: 84%;
+}
+.content-begin-end {
+    float: left;
+    width: 0;
+}
+.date-area-container span{padding-left: 5px;}
+</style>

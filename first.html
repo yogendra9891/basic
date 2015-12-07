@@ -1,0 +1,19 @@
+<!doctype html>
+<html ng-app="PlayerController">
+  <head>
+    <script src="angular.min.js"></script>
+    <script src="script.js"></script>
+	<script src="PlayerController.js"></script>
+  </head>
+  <body>
+   <div>
+  <h3>Profile Pic</h3>                         
+                        <div>
+                            <input type="file" name="image" id="image" ng-file-select="onFileSelect($files)">
+                            <br/>
+                            <span class="errorMsg">{{ message}}</span>
+                        </div>
+
+                    </div>
+  </body>
+</html>

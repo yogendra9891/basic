@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>on demo</title>
+  <style>
+  p {
+    color: red;
+  }
+  span {
+    color: blue;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+ 
+<p>Has an attached custom event.</p>
+<button>Trigger custom event</button>
+<span style="display:none;"></span>
+ 
+<script type="text/javascript">
+//(function () {
+/*t = {};
+console.log('value of t is: '+t);
+if (t === null)
+ console.log('value of t is: '+t);
+else 
+console.log('value of t is not null');
+*/
+var r;
+if (typeof r === "undefined") 
+console.log('variable is undefined.');
+else 
+console.log('t is defined..');
+
+
+var numObject= {'a' : "001", 2 : "X0091"}
+console.log(numObject.a); //This line throw an error.
+
+//This is a parent class.
+    var parent = {
+        sayHi: function () {
+            alert('Hi, I am parent!');
+        },
+        sayHiToWalk: function () {
+            alert('Hi, I am parent! and going to walk!');
+        }
+    };
+
+    //This is child class and the parent class is inherited in the child class.
+   // var child = Object.create(parent);
+   var child = {};
+   child.sayHi = function () {
+        alert('Hi, I am a child!');
+    };
+   child.__proto__ = parent;
+    
+
+//})();
+</script>
+
+<button type="button" onclick="child.sayHi();">child</button>
+<button type="button" onclick="child.sayHiToWalk();">parent</button>
+ 
+</body>
+</html>

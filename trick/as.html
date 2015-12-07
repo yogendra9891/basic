@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>on demo</title>
+  <style>
+  p {
+    color: red;
+  }
+  span {
+    color: blue;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+ 
+<script type="text/javascript">
+	function test(arg1, arg2, check) {
+		alert('argument 1 is'+ arg1+ ' argument 2 is '+ arg2);
+		if (check) check(arg1); //check and call callback function..
+	}
+	test('yogi', 'yogi1', function(s){
+		alert('I am a call back function changed..'+ s);
+	});
+</script>
+ 
+</body>
+</html>

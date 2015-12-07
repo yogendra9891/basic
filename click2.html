@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script src="jquery-1.7.1.min.js"> </script>
+<p id="demo">Click the button to add a new element to the array.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+var newarray = new Array();
+function myFunction()
+{
+
+var dict = new Array(); // create an empty array
+for (var j=0; j<fruits.length; j++) {
+    dict[j].name = fruits[j];
+}
+for (var i=0; i<dict.length; i++) {
+   alert(dict[i].name);
+}
+}
+</script>
+
+</body>
+</html>

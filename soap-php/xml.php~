@@ -1,0 +1,22 @@
+<?php
+
+$file = '<?xml version="1.0" encoding="UTF-8"?>
+<note>
+	<to>Tove</to>
+	<from>
+		<a1>
+		 <a>Jani</a><a>nani</a>
+ 		 <b>Joni</b><b>noni</b>
+ 		</a1>
+		<a2>
+		 <a>Jani1</a><a>nani1</a>
+ 		</a2>
+        </from>
+	<heading>Reminder</heading>
+	<body>Dont forget me this weekend!</body>
+</note>';
+$xml = simplexml_load_string($file);
+
+ print_r($xml);
+ echo json_encode($xml);
+?>

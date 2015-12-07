@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Maps JavaScript API v3 Example: Map Simple</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+$(function() {
+$('#test').click(function(){
+	$.ajax({
+	url : "http://172.18.3.180/angular/json.php",
+	 dataType:"jsonp",
+	 jsonp:"mycallback",
+	 success:function(data)
+	 {
+		alert("Name:"+data.name+"\nage:"+data.age+"\nlocation:"+data.location);
+	 }
+	});
+});
+});
+</script>
+</head>
+<body>
+<input type="button" id="test" value="click me" />
+</body>
+</html>
